@@ -6,30 +6,31 @@
     <title>{% block title %}Your Recipe App{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Recipe App</a>
+        <a class="navbar-brand {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">Recipe App</a>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('recipes.submit_recipe') }}">Submit Recipe</a>
+                <a class="nav-link {% if request.endpoint == 'recipes.submit_recipe' %}active{% endif %}" href="{{ url_for('recipes.submit_recipe') }}">Submit Recipe</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('recipes.view_all_recipes') }}">All Recipes</a>
+                <a class="nav-link {% if request.endpoint == 'recipes.view_all_recipes' %}active{% endif %}" href="{{ url_for('recipes.view_all_recipes') }}">All Recipes</a>
             </li>
             {% if session['username'] %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('recipes.view_my_recipes') }}">My Recipes</a>
+                <a class="nav-link {% if request.endpoint == 'recipes.view_my_recipes' %}active{% endif %}" href="{{ url_for('recipes.view_my_recipes') }}">My Recipes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                <a class="nav-link {% if request.endpoint == 'auth.logout' %}active{% endif %}" href="{{ url_for('auth.logout') }}">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                <a class="nav-link {% if request.endpoint == 'auth.register' %}active{% endif %}" href="{{ url_for('auth.register') }}">Register</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                <a class="nav-link {% if request.endpoint == 'auth.login' %}active{% endif %}" href="{{ url_for('auth.login') }}">Login</a>
             </li>
             {% endif %}
         </ul>

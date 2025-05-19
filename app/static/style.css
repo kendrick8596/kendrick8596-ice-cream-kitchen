@@ -1,0 +1,98 @@
+body {
+    background-color: #e6ffe6; /* This is a very light gray, like Bootstrap's default */
+}
+
+.navbar-light {
+    background-color: #ccffcc !important; /* The !important can help override specificity */
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #333; /* Dark gray */
+}
+
+.navbar-light .navbar-brand {
+    color: #333; /* Dark gray */
+    font-weight: bold; /* Make the brand text bolder */
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+    font-weight: bold;
+}
+
+.navbar-light .navbar-brand.active {
+    font-weight: bold; /* Apply to the brand link as well if it can be considered "active" */
+}
+
+.card {
+    border: 1px solid #e0e0e0; /* Light gray border */
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth hover animation */
+}
+
+.card:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    max-height: 200px; /* Limit image height for consistency */
+    object-fit: cover; /* Ensure images fill the space without distortion */
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333; /* Darker title text */
+}
+
+.card-text small {
+    color: #777; /* Muted prep/cook time text */
+}
+
+.card-text:last-child {
+    margin-bottom: 0; /* Remove extra margin on the last paragraph */
+}
+
+.btn-outline-primary.btn-sm.mt-2 {
+    /* You can further customize the button here if needed */
+}
+
+.col {
+    margin-bottom: 1.5rem; /* Vertical spacing between cards */
+    padding-right: 0.75rem; /* Add some right padding to create space */
+}
+
+/* Adjust padding for the last card in each row to avoid extra right space */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem; /* Adjust for the padding on .col */
+    margin-right: -0.75rem; /* Adjust for the padding on .col */
+}
+
+.row > .col {
+    padding-left: 0.75rem;
+}
+
+/* Clear the right margin for the last item in each row based on the number of columns */
+@media (min-width: 768px) { /* For 2 columns */
+    .row.row-cols-md-2 > .col:nth-child(2n) {
+        padding-right: 0;
+    }
+}
+
+@media (min-width: 992px) { /* For 3 columns */
+    .row.row-cols-lg-3 > .col:nth-child(3n) {
+        padding-right: 0;
+    }
+}
