@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}All Recipes{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4 text-primary">All Available Recipes</h1>
+        {% if recipes %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for recipe in recipes %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            {% if recipe[4] %}
+                                <img src="{{ recipe[4] }}" class="card-img-top" alt="{{ recipe[0] }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recipe[0] }}</h5>
+                                <p class="card-text"><small class="text-muted">Prep: {{ recipe[1] }} mins | Cook: {{ recipe[2] }} mins</small></p>
+                                <p class="card-text">{{ recipe[3]|truncate(100) }}</p>
+                                <a href="{{ url_for('recipes.view_recipe', recipe_id=recipe[4]) }}" class="btn btn-outline-primary btn-sm mt-2">View Recipe</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No recipes have been submitted yet.</p>
+        {% endif %}
+        <p class="mt-4"><a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Recipe{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4 text-primary">Edit Recipe</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="recipe_name" class="form-label">Recipe Name</label>
+                <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{ recipe[0] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="prep_time" class="form-label">Prep Time (minutes)</label>
+                <input type="number" class="form-control" id="prep_time" name="prep_time" value="{{ recipe[1] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="cook_time" class="form-label">Cook Time (minutes)</label>
+                <input type="number" class="form-control" id="cook_time" name="cook_time" value="{{ recipe[2] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="instructions" class="form-label">Instructions</label>
+                <textarea class="form-control" id="instructions" name="instructions" rows="5" required>{{ recipe[3] }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image_url" class="form-label">Image URL (Optional)</label>
+                <input type="text" class="form-control" id="image_url" name="image_url" value="{{ recipe[4] }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Recipe</button>
+            <a href="{{ url_for('recipes.view_my_recipes') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

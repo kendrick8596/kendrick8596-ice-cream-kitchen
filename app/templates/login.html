@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title%}User Login{% endblock %}
+
+{% block content %}
+<h1 class="text-primary mb-4">Login to Your Account</h1>
+        <form method="POST" action="/auth/login">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Login</button>
+            <p>Don't have an account? Create one! <a href="/auth/register">Register Here!</a></p>
+        </form>
+{% endblock %}
+
+<html>
+    <head>
+        <title>User Login</title>
+    </head>
+    <body>
+        <h1>Login to Your Account</h1>
+        <form method="POST" action="/auth/login">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <br>
+            <button type="submit">Login</button>
+            <p>Don't have an account? Create one! <a href="/auth/register">Register Here!</a></p>
+        </form>
+    </body>
+</html>

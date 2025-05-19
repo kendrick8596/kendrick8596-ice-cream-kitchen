@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe[0] }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4 text-primary">{{ recipe[0] }}</h1>
+        {% if recipe[4] %}
+            <img src="{{ recipe[4] }}" class="img-fluid rounded mb-3" alt="{{ recipe[0] }}">
+        {% endif %}
+        <p class="mb-1"><strong>Prep Time:</strong> {{ recipe[1] }} minutes</p>
+        <p class="mb-1"><strong>Cook Time:</strong> {{ recipe[2] }} minutes</p>
+        <h4 class="mt-4 mb-2">Instructions:</h4>
+        <p class="mb-4">{{ recipe[3]|replace('\n', '<br>')|safe }}</p>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+{% endblock %}

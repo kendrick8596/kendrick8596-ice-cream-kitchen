@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}Submit a Recipe{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4 text-primary">Submit Your Delicious Recipe</h1>
+        <form method="POST" action="{{ url_for('recipes.submit_recipe') }}" class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <label for="recipe_name">Recipe Name:</label>
+                <input type="text" id="recipe_name" name="recipe_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="prep_time">Preperation Time (in minutes):</label>
+                <input type="text" id="prep_time" name="prep_time" class="form-control">
+                <small class="form-text text-muted">e.g., 15</small>
+            </div>
+            <div class="form-group">
+                <label for="cook_time">Cook Time (in minutes):</label>
+                <input type="text" id="cook_time" name="cook_time" class="form-control">
+                <small class="form-text text-muted">e.g., 30</small>
+            </div>
+            <div class="form-group">
+                <label for="instructions">Instructions:</label>
+                <textarea id="instructions" name="instructions" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="creator_name">Your Name (optional):</label>
+                <input type="text" id="creator_name" name="creator_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="information">Additional Information (optional):</label>
+                <textarea id="information" name="information" rows="3" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit Recipe</button>
+        </form>
+    </div>
+{% endblock %}
+<html>
+    <head>
+        <title>Submit Recipe</title>
+    </head>
+    <body>
+        <h1>Submit a New Recipe</h1>
+        <form action="{{ url_for('recipes.submit_recipe') }}" method="POST">
+            <label for="recipe_name">Recipe Name:</label>
+            <input type="text" id="recipe_name" name="recipe_name" required><br><br>
+
+            <label for="prep_time">Preperation Time:</label><br>
+            <input type="text" id="prep_time" name="prep_time"><br><br>
+
+            <label for="cook_time">Cook Time:</label><br>
+            <input type="text" id="cook_time" name="cook_time"><br><br>
+
+            <label for="instructions">Instructions:</label><br>
+            <textarea type="text" id="instructions" name="instructions" rows="5" cols="20"></textarea><br><br>
+
+
+            <button type="submit">Submit Recipe</button>
+        </form>
+    </body>
+</html>
