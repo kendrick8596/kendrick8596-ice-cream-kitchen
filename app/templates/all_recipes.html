@@ -6,21 +6,15 @@
     <div class="container">
         <h1 class="mb-4 text-primary">All Available Recipes</h1>
         {% if recipes %}
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="list-group">
                 {% for recipe in recipes %}
-                    <div class="col">
-                        <div class="card h-100 shadow-sm">
-                            {% if recipe[4] %}
-                                <img src="{{ recipe[4] }}" class="card-img-top" alt="{{ recipe[0] }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ recipe[0] }}</h5>
-                                <p class="card-text"><small class="text-muted">Prep: {{ recipe[1] }} mins | Cook: {{ recipe[2] }} mins</small></p>
-                                <p class="card-text">{{ recipe[3]|truncate(100) }}</p>
-                                <a href="{{ url_for('recipes.view_recipe', recipe_id=recipe[4]) }}" class="btn btn-outline-primary btn-sm mt-2">View Recipe</a>
-                            </div>
+                    <a href="{{ url_for('recipes.view_recipe', recipe_id=recipe[4]) }}" class="list-group-item list-group-item-action flex-column align-items-start mb-2">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ recipe[0] }}</h5>
+                            <small class="text-muted text-nowrap">Prep: {{ recipe[1] }} mins | Cook: {{ recipe[2] }} mins</small>
                         </div>
-                    </div>
+                        <p class="mb-1 text-truncate-custom">{{ recipe[3] }}</p>
+                        </a>
                 {% endfor %}
             </div>
         {% else %}

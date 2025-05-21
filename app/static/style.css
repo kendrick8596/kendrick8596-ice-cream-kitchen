@@ -1,18 +1,46 @@
-body {
-    background-color: #e6ffe6; /* This is a very light gray, like Bootstrap's default */
+/* --- 1. Base / General Page Styles --- */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #e6ffe6;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Add this line */
+    line-height: 1.6; /* Add this line */
+    color: #4a4a4a; /* Add this line */
+}
+
+/* Ensure the main container can grow */
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 2. General Heading Styles --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Add this line */
+    color: #2D4059; /* Add this line */
+    margin-bottom: 0.75rem; /* Add this line */
+    font-weight: 700; /* Add this line */
+}
+
+/* --- 3. Navbar Styles --- */
 .navbar-light {
-    background-color: #ccffcc !important; /* The !important can help override specificity */
+    background-color: #ccffcc !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: #333; /* Dark gray */
+    color: #4a4a4a;
 }
 
 .navbar-light .navbar-brand {
-    color: #333; /* Dark gray */
-    font-weight: bold; /* Make the brand text bolder */
+    color: #2D4059;
+    font-weight: bold;
 }
 
 .navbar-light .navbar-nav .nav-link.active {
@@ -20,79 +48,150 @@ body {
 }
 
 .navbar-light .navbar-brand.active {
-    font-weight: bold; /* Apply to the brand link as well if it can be considered "active" */
+    font-weight: bold;
 }
 
-.card {
-    border: 1px solid #e0e0e0; /* Light gray border */
-    border-radius: 8px; /* Slightly rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s ease-in-out; /* Smooth hover animation */
+/* --- 4. Specific Page/Component Styles --- */
+
+/* Main page headings (e.g., "All Available Recipes", "Welcome to the Recipe App") */
+.container h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #007bff;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.02em;
 }
 
-.card:hover {
-    transform: scale(1.02); /* Slightly scale up on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+/* Ensure the list group itself has some top margin to separate from the H1 */
+.list-group {
+    margin-top: 1.5rem;
 }
 
-.card-img-top {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    max-height: 200px; /* Limit image height for consistency */
-    object-fit: cover; /* Ensure images fill the space without distortion */
+/* List Group Item Styles */
+.list-group-item {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: all 0.2s ease-in-out;
 }
 
-.card-body {
-    padding: 1rem;
+.list-group-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    background-color: #f8f9fa;
 }
 
-.card-title {
-    font-size: 1.25rem;
+/* Recipe titles within the list group */
+.list-group-item h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 0.25rem;
+}
+
+/* Prep/Cook Times */
+.list-group-item small {
+    font-size: 0.8em;
+    color: #778899;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+/* Recipe Description Snippets */
+.list-group-item p {
+    font-size: 0.95rem;
+    color: #4a4a4a;
+    margin-top: 0.5rem;
+}
+
+/* --- Form Styles --- */
+.form-group label {
+    font-weight: 600; /* Semi-bold labels */
+    color: #2D4059; /* Matching heading color */
     margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border: 1px solid #ced4da; /* Default Bootstrap border */
+    border-radius: 6px; /* Slightly rounded corners */
+    padding: 0.75rem 1rem; /* More comfortable padding */
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #4A4A4A; /* Text color inside input fields */
+    background-color: #f8f9fa; /* Light background for inputs */
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #80bdff; /* Bootstrap's default focus blue */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Bootstrap's default focus shadow */
+    background-color: #fff; /* White background on focus */
+}
+
+textarea.form-control {
+    min-height: 120px; /* Minimum height for textareas */
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+/* Primary Form Button Styling (e.g., Submit) */
+.btn-primary {
+    background-color: #007bff; /* Primary blue for action buttons */
+    border-color: #007bff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #004085;
+}
+
+/* Secondary Button Styling (e.g., Logout, Back) */
+.btn-secondary {
+    background-color: #6c757d; /* Muted gray for secondary actions */
+    border-color: #6c757d;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Outline Button (e.g., used for "View Recipe" in recipe detail or if you want to keep it) */
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* General button spacing if needed */
+.btn-group .btn {
+    margin-right: 0.5rem; /* Space between buttons in a group */
+}
+
+/* Custom truncation for list items */
+.text-truncate-custom {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #333; /* Darker title text */
+    line-height: 1.4em;
+    max-height: 2.8em;
 }
 
-.card-text small {
-    color: #777; /* Muted prep/cook time text */
-}
-
-.card-text:last-child {
-    margin-bottom: 0; /* Remove extra margin on the last paragraph */
-}
-
-.btn-outline-primary.btn-sm.mt-2 {
-    /* You can further customize the button here if needed */
-}
-
-.col {
-    margin-bottom: 1.5rem; /* Vertical spacing between cards */
-    padding-right: 0.75rem; /* Add some right padding to create space */
-}
-
-/* Adjust padding for the last card in each row to avoid extra right space */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -0.75rem; /* Adjust for the padding on .col */
-    margin-right: -0.75rem; /* Adjust for the padding on .col */
-}
-
-.row > .col {
-    padding-left: 0.75rem;
-}
-
-/* Clear the right margin for the last item in each row based on the number of columns */
-@media (min-width: 768px) { /* For 2 columns */
-    .row.row-cols-md-2 > .col:nth-child(2n) {
-        padding-right: 0;
-    }
-}
-
-@media (min-width: 992px) { /* For 3 columns */
-    .row.row-cols-lg-3 > .col:nth-child(3n) {
-        padding-right: 0;
-    }
-}
+/* Any other custom styles go here, like buttons for example */
