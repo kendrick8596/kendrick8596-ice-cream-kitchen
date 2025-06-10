@@ -1,4 +1,6 @@
 Flask
 psycopg2-binary
+Flask-Login
 boto3
 bcrypt
+gunicorn
