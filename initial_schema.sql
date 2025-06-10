@@ -33,6 +33,9 @@ CREATE TABLE IF NOT EXISTS recipes (
     prep_time VARCHAR(50),
     cook_time VARCHAR(50),
     instructions TEXT NOT NULL,
+    image_url VARCHAR(255),
+    description TEXT,
+    ingredients TEXT,
     creator_account_id INTEGER REFERENCES accounts(account_id), -- Foreign key linking to the accounts table
     submitted_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
