@@ -1,17 +1,88 @@
-{% extends 'base.html' %}
-
-{% block title %}{{ recipe[0] }}{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="mb-4 text-primary">{{ recipe[0] }}</h1>
-        {% if recipe[4] %}
-            <img src="{{ recipe[4] }}" class="img-fluid rounded mb-3" alt="{{ recipe[0] }}">
-        {% endif %}
-        <p class="mb-1"><strong>Prep Time:</strong> {{ recipe[1] }} minutes</p>
-        <p class="mb-1"><strong>Cook Time:</strong> {{ recipe[2] }} minutes</p>
-        <h4 class="mt-4 mb-2">Instructions:</h4>
-        <p class="mb-4">{{ recipe[3]|replace('\n', '<br>')|safe }}</p>
-        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8"> 
+            <div class="recipe-detail-card p-4 shadow-sm"> 
+                <h1 class="recipe-title text-center mb-4">{{ recipe[0] }}</h1> 
+                
+                {# CORRECTED IMAGE DISPLAY #}
+                {% if recipe[4] %} 
+                    <img src="{{ url_for('static', filename=recipe[4]) }}" class="img-fluid rounded mb-4 recipe-detail-img" alt="{{ recipe[0] }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" class="img-fluid rounded mb-4 recipe-detail-img" alt="Recipe Placeholder">
+                {% endif %}
+                {# END CORRECTED IMAGE DISPLAY #}
+
+                <div class="d-flex justify-content-between align-items-center mb-3 recipe-times">
+                    <p class="mb-0 text-muted"><strong>Prep Time:</strong> {{ recipe[1] }} mins</p>
+                    <p class="mb-0 text-muted"><strong>Cook Time:</strong> {{ recipe[2] }} mins</p>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="recipe-description mb-4">
+                    <h3>Description</h3>
+                    {% if recipe[5] %} <p>{{ recipe[5] }}</p>
+                    {% else %}
+                        <p>No description provided for this recipe.</p>
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="recipe-ingredients">
+                            <h3>Ingredients</h3>
+                            <ul class="list-unstyled">
+                                {% if recipe[6] %}
+                                    {# Change '\n' to '&#10;' to split by the stored HTML entity #}
+                                    {% for ingredient in recipe[6].split(', ') %}
+                                        {% if ingredient.strip() %} {# Added .strip() check for robustness #}
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>{{ ingredient.strip() }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <li>No ingredients listed for this recipe.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="recipe-instructions">
+                            <h3>Instructions</h3>
+                            <ol>
+                                {% if recipe[3] %} 
+                                    {% for step in recipe[3].split('\n') %}
+                                        {% if step.strip() %} 
+                                            <li>{{ step.strip() }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <li>No instructions provided for this recipe.</li>
+                                {% endif %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                {% if current_user.is_authenticated and current_user.id == recipe[7] %} 
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('recipes.edit_recipe', recipe_id=recipe[8]) }}" class="btn btn-primary me-2">Edit Recipe</a> 
+                        <form action="{{ url_for('recipes.delete_recipe', recipe_id=recipe[8]) }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this recipe?');">Delete Recipe</button>
+                        </form>
+                    </div>
+                {% endif %}
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('recipes.view_all_recipes') }}" class="btn btn-secondary">Back to All Recipes</a>
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

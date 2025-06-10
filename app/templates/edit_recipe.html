@@ -1,33 +1,72 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit Recipe{% endblock %}
-
 {% block content %}
-    <div class="container">
-        <h1 class="mb-4 text-primary">Edit Recipe</h1>
-        <form method="POST">
-            <div class="mb-3">
-                <label for="recipe_name" class="form-label">Recipe Name</label>
-                <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{ recipe[0] }}" required>
+    <h1>Edit Recipe</h1>
+    <hr>
+    
+    {# Display flash messages here if any #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
             </div>
-            <div class="mb-3">
-                <label for="prep_time" class="form-label">Prep Time (minutes)</label>
-                <input type="number" class="form-control" id="prep_time" name="prep_time" value="{{ recipe[1] }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="cook_time" class="form-label">Cook Time (minutes)</label>
-                <input type="number" class="form-control" id="cook_time" name="cook_time" value="{{ recipe[2] }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="instructions" class="form-label">Instructions</label>
-                <textarea class="form-control" id="instructions" name="instructions" rows="5" required>{{ recipe[3] }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="image_url" class="form-label">Image URL (Optional)</label>
-                <input type="text" class="form-control" id="image_url" name="image_url" value="{{ recipe[4] }}">
-            </div>
-            <button type="submit" class="btn btn-primary">Update Recipe</button>
-            <a href="{{ url_for('recipes.view_my_recipes') }}" class="btn btn-secondary">Cancel</a>
-        </form>
-    </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('recipes.edit_recipe', recipe_id=recipe_id) }}" enctype="multipart/form-data">
+        {# General Recipe Details #}
+        <div class="form-group">
+            <label for="recipe_name">Recipe Name:</label>
+            <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{ recipe[0] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="prep_time">Preparation Time (e.g., 30 min):</label>
+            <input type="text" class="form-control" id="prep_time" name="prep_time" value="{{ recipe[1] }}">
+        </div>
+
+        <div class="form-group">
+            <label for="cook_time">Cook Time (e.g., 1 hr):</label>
+            <input type="text" class="form-control" id="cook_time" name="cook_time" value="{{ recipe[2] }}">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description (Optional):</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{ recipe[5] }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="ingredients">Ingredients (one per line):</label>
+            <textarea class="form-control" id="ingredients" name="ingredients" rows="5" required>{{ recipe[6] | replace(', ', '\n') | safe }}</textarea>
+            <small class="form-text text-muted">Enter each ingredient on a new line.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions (step-by-step):</label>
+            <textarea class="form-control" id="instructions" name="instructions" rows="8" required>{{ recipe[3] }}</textarea>
+            <small class="form-text text-muted">Enter each step on a new line. Steps will be numbered automatically.</small>
+        </div>
+
+        {# --- IMAGE UPLOAD SECTION --- #}
+        <div class="form-group">
+            <label>Current Image:</label>
+            {% if recipe[4] %}
+                <img src="{{ url_for('static', filename=recipe.image_url) }}" alt="{{ recipe[4] }}" class="img-thumbnail" style="max-width: 200px; max-height: 200px; margin-bottom: 10px;">
+            {% else %}
+                <p>No image uploaded yet for this recipe.</p>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="recipe_image">Upload New Image (Optional - will replace current if selected):</label>
+            <input type="file" class="form-control-file" id="recipe_image" name="recipe_image" accept="image/*">
+            <small class="form-text text-muted">Max file size: 2MB. Accepted formats: JPG, PNG, GIF.</small>
+        </div>
+        {# --- END IMAGE UPLOAD SECTION --- #}
+
+        <button type="submit" class="btn btn-primary">Update Recipe</button>
+        <a href="{{ url_for('recipes.view_my_recipes') }}" class="btn btn-secondary">Cancel</a>
+    </form>
 {% endblock %}

@@ -20,9 +20,12 @@
             <li class="nav-item">
                 <a class="nav-link {% if request.endpoint == 'recipes.view_all_recipes' %}active{% endif %}" href="{{ url_for('recipes.view_all_recipes') }}">All Recipes</a>
             </li>
-            {% if session['username'] %}
+            {% if current_user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link {% if request.endpoint == 'recipes.view_my_recipes' %}active{% endif %}" href="{{ url_for('recipes.view_my_recipes') }}">My Recipes</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Welcome, {{ current_user.username }}!</span>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.endpoint == 'auth.logout' %}active{% endif %}" href="{{ url_for('auth.logout') }}">Logout</a>

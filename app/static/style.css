@@ -109,21 +109,37 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- Form Styles --- */
-.form-group label {
-    font-weight: 600; /* Semi-bold labels */
-    color: #2D4059; /* Matching heading color */
-    margin-bottom: 0.5rem;
+/* Align labels and inputs within form groups */
+.form-group {
+    display: flex; /* Make the form group a flex container */
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align children to the start of the cross axis (left) */
+    /* Add some margin bottom for spacing between form groups */
+    margin-bottom: 1rem; /* Adjust as needed */
 }
 
+/* Remove padding-left from label if it was previously added and causing issues */
+.form-group label {
+    font-weight: 600;
+    color: #2D4059;
+    margin-bottom: 0.5rem;
+    /* Remove or comment out this line if you added it: */
+    /* padding-left: 1rem; */
+}
+
+/* Adjust padding on form-control if necessary, but keep it consistent */
 .form-control {
-    border: 1px solid #ced4da; /* Default Bootstrap border */
-    border-radius: 6px; /* Slightly rounded corners */
-    padding: 0.75rem 1rem; /* More comfortable padding */
+    /* Your existing .form-control styles: */
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #4A4A4A; /* Text color inside input fields */
-    background-color: #f8f9fa; /* Light background for inputs */
+    color: #4A4A4A;
+    background-color: #f8f9fa;
     transition: all 0.2s ease-in-out;
+    width: 100%; /* Ensure it still takes full width of its column */
+    max-width: 100%; /* Redundant with width: 100% but safe */
 }
 
 .form-control:focus {
@@ -137,29 +153,56 @@ textarea.form-control {
     resize: vertical; /* Allow vertical resizing only */
 }
 
-/* Primary Form Button Styling (e.g., Submit) */
+/* --- General Button Styles --- */
+/* Apply consistent sizing and font weight to ALL Bootstrap buttons */
+.btn {
+    font-weight: 600; /* All buttons semi-bold */
+    padding: 0.75rem 1.5rem; /* All buttons same padding for consistent size */
+    border-radius: 6px; /* All buttons same border radius */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Primary Button Styling (e.g., Register, Submit forms, primary actions) */
 .btn-primary {
-    background-color: #007bff; /* Primary blue for action buttons */
+    background-color: #007bff;
     border-color: #007bff;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    color: #fff; /* Ensure text color is white for solid buttons */
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
     border-color: #004085;
 }
 
-/* Secondary Button Styling (e.g., Logout, Back) */
+/* Info Button Styling (e.g., "Submit a Recipe" - this is typically btn-info) */
+.btn-info {
+    background-color: #17a2b8; /* Standard Bootstrap info blue-green */
+    border-color: #17a2b8;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+/* Success Button Styling (e.g., "Log in" - this is typically btn-success) */
+.btn-success {
+    background-color: #28a745; /* Standard Bootstrap success green */
+    border-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* Secondary Button Styling (e.g., Logout, Back actions) */
 .btn-secondary {
-    background-color: #6c757d; /* Muted gray for secondary actions */
+    background-color: #6c757d;
     border-color: #6c757d;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    color: #fff;
 }
 
 .btn-secondary:hover {
@@ -167,10 +210,11 @@ textarea.form-control {
     border-color: #545b62;
 }
 
-/* Outline Button (e.g., used for "View Recipe" in recipe detail or if you want to keep it) */
+/* Outline Button (e.g., used for "View Recipe" links, if any) */
 .btn-outline-primary {
     border-color: #007bff;
     color: #007bff;
+    background-color: transparent; /* Explicitly ensure background is transparent */
 }
 
 .btn-outline-primary:hover {
@@ -178,7 +222,7 @@ textarea.form-control {
     color: #fff;
 }
 
-/* General button spacing if needed */
+/* General button spacing for groups (like on the welcome page) */
 .btn-group .btn {
     margin-right: 0.5rem; /* Space between buttons in a group */
 }
